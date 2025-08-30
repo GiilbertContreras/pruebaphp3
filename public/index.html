@@ -1,26 +1,32 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tasks - Demo</title>
-  <style>
-    body{font-family: Arial, Helvetica, sans-serif; max-width:800px;margin:40px auto;padding:10px;}
-    input, button{padding:8px;margin:4px 0;}
-    ul{list-style:none;padding:0;}
-    li{padding:8px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;}
-  </style>
-</head>
-<body>
-  <h1>Tareas</h1>
-  <div id="app">
-    <form id="form">
-      <input id="title" placeholder="Título" required />
-      <input id="description" placeholder="Descripción" />
-      <button type="submit">Crear</button>
-    </form>
-    <ul id="list"></ul>
-  </div>
-  <script src="./app.js"></script>
-</body>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Swagger UI CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui.css" />
+    </head>
+    <body>
+        <div id="swagger-ui">
+            <!-- Contenedor para Swagger UI -->
+        </div>
+
+        <!-- Swagger UI -->
+        <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js"></script>
+        <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js"></script>
+        <!-- Eventos -->
+        <script>
+            // Inicializa Swagger UI
+            const ui = SwaggerUIBundle({
+                url: "swagger.yaml",
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+                layout: "StandaloneLayout"
+            });
+        </script>
+    </body>
 </html>
