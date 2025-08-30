@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Redirige todo a public/index.php
+RewriteRule ^.*$ public/index.php [QSA,L]
