@@ -69,17 +69,6 @@
     $requestUri = strtok($_SERVER['REQUEST_URI'], '?'); //URI sin query string
     $path = '/' . ltrim(str_replace($basePath, '', $requestUri), '/'); //Normalizar
 
-    // Imprimir en el log de PHP
-    error_log("[DEBUG] basePath: " . $basePath);
-    error_log("[DEBUG] requestUri: " . $requestUri);
-    error_log("[DEBUG] path: " . $path);
-
-    /* REDIRECCIÓN A index.html SI NO HAY RUTA */
-    if ($path === '/' || $path === '' || $path === '/pruebaphp3/') {
-        header('Location: public/index.html');
-        exit;
-    }
-
     /* Procesar Peticion */
     try {
         $router->dispatch($_SERVER['REQUEST_METHOD'], $path);
@@ -90,5 +79,4 @@
             "detalle" => $e->getMessage()
         ]);
     }
-
 ?>
