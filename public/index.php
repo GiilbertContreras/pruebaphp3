@@ -69,6 +69,12 @@
     $requestUri = strtok($_SERVER['REQUEST_URI'], '?'); //URI sin query string
     $path = '/' . ltrim(str_replace($basePath, '', $requestUri), '/'); //Normalizar
 
+    /* REDIRECCIÓN A index.html SI NO HAY RUTA */
+    if ($path === '/' || $path === '') {
+        header('Location: index.html');
+        exit;
+    }
+
     /* Procesar Peticion */
     try {
         $router->dispatch($_SERVER['REQUEST_METHOD'], $path);
@@ -79,4 +85,5 @@
             "detalle" => $e->getMessage()
         ]);
     }
+
 ?>

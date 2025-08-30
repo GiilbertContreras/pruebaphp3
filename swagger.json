@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: API de Tareas - Demo
+  description: API para manejar tareas con título y descripción
+  version: 1.0.0
+servers:
+  - url: https://pruebaphp3-5ca16e100849.herokuapp.com/public/api
+    description: Nube Pública
+paths:
+  /tasks:
+    get:
+      summary: Obtener todas las tareas
+      tags:
+        - Tareas
+      responses:
+        '200':
+          description: Lista de tareas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      summary: Crear una nueva tarea
+      tags:
+        - Tareas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Tarea creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /tasks/{id}:
+    get:
+      summary: Obtener una tarea por ID
+      tags:
+        - Tareas
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tarea encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Tarea no encontrada
+    put:
+      summary: Actualizar una tarea existente
+      tags:
+        - Tareas
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '200':
+          description: Tarea actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Tarea no encontrada
+    delete:
+      summary: Eliminar una tarea
+      tags:
+        - Tareas
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Tarea eliminada
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1"
+        title:
+          type: string
+          example: "Comprar leche"
+        description:
+          type: string
+          example: "Ir al supermercado a comprar leche y huevos"
+    TaskInput:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Comprar leche"
+        description:
+          type: string
+          example: "Ir al supermercado a comprar leche y huevos"
+      required:
+        - title
